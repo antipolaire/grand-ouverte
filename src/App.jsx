@@ -1,14 +1,17 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
 import { Instagram, Facebook, Twitter, Music, Calendar, Menu, X } from "lucide-react";
 
 /**
- * GRAND OUVERTE — One‑Pager (Pro UI/UX pass)
+ * GRAND OUVERTE — One‑Pager (Pro UI/UX pass + Performance Optimizations)
  * - Accessible semantic structure (header/nav/main/section/footer)
  * - Consistent spacing scale + container widths
  * - Scroll‑snap carousels, reduced‑motion friendly animations
  * - Mobile‑first responsive grid (no window.innerWidth during render)
  * - Lightweight design tokens via CSS variables
  * - Keyboard and screen‑reader friendly nav & form
+ * - Lazy loading images with native loading="lazy"
+ * - WebP support with fallbacks
+ * - Optimized performance with React best practices
  */
 
 export default function App() {
@@ -25,7 +28,7 @@ export default function App() {
 
     const albums = useMemo(
         () => [
-           {
+            {
                 id: 1,
                 title: "Liebesspieler",
                 members:
@@ -34,6 +37,8 @@ export default function App() {
                     "Rohe Energie trifft auf emotionale Tiefe",
                 cover:
                     "images/album_1.png",
+                coverWebP:
+                    "images/album_1.webp",
                 vinylColor: "hsl(355, 64%, 48%)",
             },
             {
@@ -45,6 +50,8 @@ export default function App() {
                     "Übernatürlicher Abstieg in den Abgrund – unerbittliche Schwere, hypnotische Melancholie.",
                 cover:
                     "images/album_2.png",
+                coverWebP:
+                    "images/album_2.webp",
                 vinylColor: "hsl(130, 42%, 84%)",
             },
         ],
@@ -304,12 +311,16 @@ function AlbumCard({ album }) {
             onMouseLeave={() => setHover(false)}
         >
             <div className="album-media">
-                <img
-                    className="album-cover"
-                    src={album.cover}
-                    alt={`${album.title} — album cover`}
-                    loading="lazy"
-                />
+                <picture>
+                    {album.coverWebP && <source srcSet={album.coverWebP} type="image/webp" />}
+                    <img
+                        className="album-cover"
+                        src={album.cover}
+                        alt={`${album.title} — album cover`}
+                        loading="lazy"
+                        decoding="async"
+                    />
+                </picture>
                 <div
                     className="vinyl"
                     style={{
@@ -339,10 +350,10 @@ function AlbumCard({ album }) {
 
 function BandGrid() {
     const members = [
-        { name: "Marcel Wache", role: "Lead Vocals", image: "images/thomas_studio.png" },
-        { name: "David", role: "Drums", image: "images/erik.png" },
-        { name: "Thomas Wolf", role: "Lead Guitar", image: "images/DSCF0112.jpg" },
-        { name: "Erik", role: "Bass", image: "images/dave_drums.jpg" },
+        { name: "Marcel Wache", role: "Lead Vocals", image: "images/thomas_studio.png", imageWebP: "images/thomas_studio.webp" },
+        { name: "David", role: "Drums", image: "images/erik.png", imageWebP: "images/erik.webp" },
+        { name: "Thomas Wolf", role: "Lead Guitar", image: "images/DSCF0112.jpg", imageWebP: "images/DSCF0112.webp" },
+        { name: "Erik", role: "Bass", image: "images/dave_drums.jpg", imageWebP: "images/dave_drums.webp" },
     ];
     return (
         <div style={{
@@ -375,19 +386,24 @@ function BandGrid() {
                         borderRadius: '0px',
                         height: '100%'
                     }}>
-                        <img
-                            src={member.image}
-                            alt={member.name}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                filter: 'grayscale(100%)',
-                                transition: 'filter 0.3s'
-                            }}
-                            onMouseEnter={e => e.target.style.filter = 'grayscale(0%)'}
-                            onMouseLeave={e => e.target.style.filter = 'grayscale(100%)'}
-                        />
+                        <picture>
+                            {member.imageWebP && <source srcSet={member.imageWebP} type="image/webp" />}
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                loading="lazy"
+                                decoding="async"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    filter: 'grayscale(100%)',
+                                    transition: 'filter 0.3s'
+                                }}
+                                onMouseEnter={e => e.target.style.filter = 'grayscale(0%)'}
+                                onMouseLeave={e => e.target.style.filter = 'grayscale(100%)'}
+                            />
+                        </picture>
                     </div>
                 </div>
             ))}
@@ -398,7 +414,12 @@ function BandGrid() {
 function Figure({src, alt}) {
     return (
         <figure className="shot">
-            <img src={src} alt={alt} loading="lazy"/>
+            <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                decoding="async"
+            />
         </figure>
     );
 }
@@ -418,14 +439,14 @@ function usePrefersReducedMotion() {
 }
 
 const GALLERY = [
-    "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=600&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&h=600&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=600&fit=crop&q=80&auto=format",
+    "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&h=600&fit=crop&q=80&auto=format",
 ];
 
 
