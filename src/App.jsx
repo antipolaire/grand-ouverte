@@ -437,8 +437,8 @@ function MobileMenu({ open, onClose }) {
             </nav>
             <div className="mobile-social">
                 <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden /></a>
-                <a href="#" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
-                <a href="#" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
+                <a href="https://www.facebook.com/people/Grand-Ouverte/61582449352378/" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
+                <a href="https://grandouverte.bandcamp.com" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
             </div>
         </div>
     );
