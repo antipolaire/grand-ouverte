@@ -1,17 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
-import { Instagram, Facebook, Twitter, Music, Calendar, Menu, X } from "lucide-react";
+import {  Music, Calendar, Menu, X, Play, ShoppingCart } from "lucide-react";
+import { FaFacebook as Facebook, FaInstagram as Instagram, FaBandcamp as Bandcamp } from "react-icons/fa";
 
 /**
- * GRAND OUVERTE — One‑Pager (Pro UI/UX pass + Performance Optimizations)
- * - Accessible semantic structure (header/nav/main/section/footer)
- * - Consistent spacing scale + container widths
- * - Scroll‑snap carousels, reduced‑motion friendly animations
- * - Mobile‑first responsive grid (no window.innerWidth during render)
- * - Lightweight design tokens via CSS variables
- * - Keyboard and screen‑reader friendly nav & form
- * - Lazy loading images with native loading="lazy"
- * - WebP support with fallbacks
- * - Optimized performance with React best practices
+ * GRAND OUVERTE – Enhanced One-Pager (Premium UI/UX Edition)
+ * - Professional polish with modern effects
+ * - Sophisticated animations and transitions
+ * - Glassmorphism and gradient effects
+ * - Enhanced micro-interactions
+ * - Smooth scroll reveals
+ * - Premium card designs
  */
 
 export default function App() {
@@ -145,15 +143,15 @@ export default function App() {
             <main id="main">
                 {/* ----- Events ----- */}
                 <section id="events" className="section section-dark">
-                    {/*<SectionHeader title="Wir sehen uns - LIVE!" cta={{ label: "Mehr Events", href: "#" }} />*/}
+                    <SectionHeader title="Wir sehen uns - LIVE!" />
                     <ul className="events-list" role="list">
                         {events.map((ev, i) => (
                             <li key={i} className="event">
                                 <div className="event-col">
                                     <div className="event-date">{ev.date}</div>
                                     <div className="event-venue">{ev.venue}</div>
+                                    <div className="event-loc">{ev.location}</div>
                                 </div>
-                                <div className="event-loc">{ev.location}</div>
                                 <a className="btn btn-line" href={ev.url} aria-label={`Tickets for ${ev.venue}`}>
                                     Tickets
                                 </a>
@@ -162,7 +160,7 @@ export default function App() {
                     </ul>
                 </section>
 
-                {/* ----- Music / Discography (horizontal scroll‑snap) ----- */}
+                {/* ----- Music / Discography ----- */}
                 <section id="music" className="section">
                     <SectionHeader title="EPs & ALBEN" />
                     <div className="album-row" data-reduced={prefersReducedMotion}>
@@ -171,8 +169,6 @@ export default function App() {
                         )}
                     </div>
                 </section>
-
-
 
                 {/* ----- Band ----- */}
                 <section id="band" className="section section-gradient">
@@ -225,8 +221,8 @@ export default function App() {
                         </p>
                         <form className="newsletter" onSubmit={(e) => e.preventDefault()} aria-label="Subscribe to newsletter">
                             <label className="sr-only" htmlFor="email">Email</label>
-                            <input id="email" type="email" inputMode="email" autoComplete="email" required placeholder="Deine EMail" />
-                            <button className="btn btn-primary" type="submit">Submit</button>
+                            <input id="email" type="email" inputMode="email" autoComplete="email" required placeholder="Deine E-Mail Adresse" />
+                            <button className="btn btn-primary" type="submit">Anmelden</button>
                         </form>
                         <p className="fineprint">
                             Wir respektieren deine Privatsphäre. Deine Daten werden sicher und vertraulich behandelt.
@@ -258,8 +254,7 @@ export default function App() {
                         <ul className="foot-links" role="list">
                             {[
                                 ["Events", "#events"],
-                                // ["News", "#newsletter"],
-                                // ["Store & Merch", "#"],
+                                ["Newsletter", "#newsletter"],
                             ].map(([label, href]) => (
                                 <li key={label}><a href={href}>{label}</a></li>
                             ))}
@@ -270,7 +265,7 @@ export default function App() {
                         <div className="socials">
                             <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden /></a>
                             <a href="#" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
-                            <a href="#" aria-label="Twitter"><Twitter size={22} aria-hidden /></a>
+                            <a href="#" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
                         </div>
                     </div>
                 </div>
@@ -309,7 +304,7 @@ function AlbumCard({ album }) {
                     <img
                         className="album-cover"
                         src={album.cover}
-                        alt={`${album.title} — album cover`}
+                        alt={`${album.title} – album cover`}
                         loading="lazy"
                         decoding="async"
                     />
@@ -333,8 +328,12 @@ function AlbumCard({ album }) {
                 <p className="album-members">{album.members}</p>
                 <p className="album-desc">{album.description}</p>
                 <div className="album-cta">
-                    <a href="#" className="btn btn-line">Play</a>
-                    <a href="#" className="btn btn-ghost">Buy</a>
+                    <a href="#" className="btn btn-line">
+                        <Play size={16} aria-hidden /> Play
+                    </a>
+                    <a href="#" className="btn btn-ghost">
+                        <ShoppingCart size={16} aria-hidden /> Buy
+                    </a>
                 </div>
             </div>
         </article>
@@ -425,7 +424,7 @@ function MobileMenu({ open, onClose }) {
         <div id="mobile-menu" className={"mobile-menu" + (open ? " open" : "")}>
             <nav aria-label="Mobile">
                 {[
-                    ["MUSIC", "#music"],
+                    ["MUSIK", "#music"],
                     ["LIVE", "#events"],
                     ["BAND", "#band"],
                     ["FOTOS", "#gallery"],
@@ -439,7 +438,7 @@ function MobileMenu({ open, onClose }) {
             <div className="mobile-social">
                 <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden /></a>
                 <a href="#" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
-                <a href="#" aria-label="Twitter"><Twitter size={22} aria-hidden /></a>
+                <a href="#" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
             </div>
         </div>
     );
