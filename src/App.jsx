@@ -145,7 +145,7 @@ export default function App() {
             <main id="main">
                 {/* ----- Events ----- */}
                 <section id="events" className="section section-dark">
-                    <SectionHeader title="Wir sehen uns - LIVE!" cta={{ label: "Mehr Events", href: "#" }} />
+                    {/*<SectionHeader title="Wir sehen uns - LIVE!" cta={{ label: "Mehr Events", href: "#" }} />*/}
                     <ul className="events-list" role="list">
                         {events.map((ev, i) => (
                             <li key={i} className="event">
@@ -179,15 +179,8 @@ export default function App() {
                     <div className="container">
                         <h2 className="headline">ENERGIE // FREIHEIT // GEFÜHLE // MENSCHEN</h2>
                         <BandGrid/>
-                        <div style={{textAlign: 'center', position: 'relative', zIndex: 1}}>
-                            <p style={{
-                                fontSize: '1.5rem',
-                                maxWidth: '800px',
-                                margin: '0 auto',
-                                lineHeight: 1.6,
-                                color: '#eaeaea',
-                                fontWeight: 300
-                            }}>
+                        <div className="band-description">
+                            <p>
                                 Grand Ouvert, das seltenste Spiel beim Skat, ein anzügliches Kleidungsstück, die große
                                 Freiheit!
                                 Rockmusik mit Texten über Rebellion, Poesie, Ängste, Hoffnung, Humor und alles dazwischen.
@@ -265,8 +258,8 @@ export default function App() {
                         <ul className="foot-links" role="list">
                             {[
                                 ["Events", "#events"],
-                                ["News", "#newsletter"],
-                                ["Store", "#"],
+                                // ["News", "#newsletter"],
+                                // ["Store & Merch", "#"],
                             ].map(([label, href]) => (
                                 <li key={label}><a href={href}>{label}</a></li>
                             ))}
@@ -355,37 +348,22 @@ function BandGrid() {
         { name: "Thomas Wolf", role: "Lead Guitar", image: "images/DSCF0112.jpg", imageWebP: "images/DSCF0112.webp" },
         { name: "Erik", role: "Bass", image: "images/dave_drums.jpg", imageWebP: "images/dave_drums.webp" },
     ];
+
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+
     return (
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: '2%',
-            marginBottom: '4rem',
-            justifyContent: 'center',
-            maxWidth: '1200px',
-            margin: '0 auto 4rem',
-            position: 'relative',
-            zIndex: 1
-        }}>
+        <div className="band-grid">
             {members.map((member, idx) => (
                 <div
                     key={idx}
-                    style={{
-                        cursor: 'pointer',
-                        aspectRatio: '2/3',
-                        transform: idx % 2 === 0 ? 'rotate(13deg)' : 'rotate(-13deg)',
-                        transition: 'all 0.3s'
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'rotate(0deg) scale(1.05)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = idx % 2 === 0 ? 'rotate(13deg)' : 'rotate(-13deg)'}
+                    className={`band-card ${hoveredIndex === idx ? 'hovered' : ''}`}
+                    data-rotation={idx % 2 === 0 ? 'right' : 'left'}
+                    onMouseEnter={() => setHoveredIndex(idx)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onTouchStart={() => setHoveredIndex(idx)}
+                    onTouchEnd={() => setHoveredIndex(null)}
                 >
-                    <div style={{
-                        position: 'relative',
-                        overflow: 'hidden',
-                        marginBottom: '1rem',
-                        borderRadius: '0px',
-                        height: '100%'
-                    }}>
+                    <div className="band-card-inner">
                         <picture>
                             {member.imageWebP && <source srcSet={member.imageWebP} type="image/webp" />}
                             <img
@@ -393,15 +371,7 @@ function BandGrid() {
                                 alt={member.name}
                                 loading="lazy"
                                 decoding="async"
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    filter: 'grayscale(100%)',
-                                    transition: 'filter 0.3s'
-                                }}
-                                onMouseEnter={e => e.target.style.filter = 'grayscale(0%)'}
-                                onMouseLeave={e => e.target.style.filter = 'grayscale(100%)'}
+                                className="band-img"
                             />
                         </picture>
                     </div>
