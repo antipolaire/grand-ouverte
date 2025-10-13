@@ -4,114 +4,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
 
+
   <!-- iOS specific optimizations -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
+
 
   <!-- Primary Meta Tags -->
   <title>Grand Ouverte - Handgemachter Indie Rock aus Dresden</title>
   <meta name="title" content="Grand Ouverte - Handgemachter Indie Rock aus Dresden" />
   <meta name="description" content="Grand Ouverte - Rockmusik mit Texten über Rebellion, Poesie, Ängste, Hoffnung und Humor. Intense elektrisierende Klanglandschaften aus Dresden." />
 
-  <!-- Performance Optimizations -->
 
-  <!-- Preconnect to external domains (reduces DNS lookup + TCP handshake time) -->
+  <!-- Fonts: prevent FOUT and keep it lean -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+
+
+  <!-- Preconnect to external images (Unsplash in gallery) -->
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   <link rel="dns-prefetch" href="https://images.unsplash.com" />
 
-  <!-- Preload critical assets -->
-  <!-- If you're using custom fonts, preload them here -->
-  <!-- <link rel="preload" as="font" type="font/woff2" href="/fonts/YourFont.woff2" crossorigin /> -->
 
-  <!-- Theme color for browser chrome -->
-  <meta name="theme-color" content="#0a0a0a" />
-
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://grandouverte.com/" />
   <meta property="og:title" content="Grand Ouverte - Handgemachter Indie Rock aus Dresden" />
   <meta property="og:description" content="Rockmusik mit Texten über Rebellion, Poesie, Ängste, Hoffnung und Humor." />
   <meta property="og:image" content="/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Grand Ouverte - Handgemachter Indie Rock aus Dresden" />
+  <meta name="twitter:description" content="Rockmusik mit Texten über Rebellion, Poesie, Ängste, Hoffnung und Humor." />
+  <meta name="twitter:image" content="/images/og-image.jpg" />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://grandouverte.com/" />
-  <meta property="twitter:title" content="Grand Ouverte - Handgemachter Indie Rock aus Dresden" />
-  <meta property="twitter:description" content="Rockmusik mit Texten über Rebellion, Poesie, Ängste, Hoffnung und Humor." />
-  <meta property="twitter:image" content="/images/og-image.jpg" />
+
+  <!-- Theme color for browser chrome -->
+  <meta name="theme-color" content="#0a0a0a" />
+
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-
-  <!-- Apple Touch Icon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-
-  <!-- Manifest for PWA support -->
   <link rel="manifest" href="/assets/manifest-CwnsAKV0.json" />
 
-  <!-- Prevent FOUT (Flash of Unstyled Text) -->
+
+  <!-- Critical anti‑FOUT + initial paint -->
   <style>
-    /* Critical CSS - inline for instant render */
-    body {
-      margin: 0;
-      background: #0a0a0a;
-      color: #ffffff;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    /* Loading spinner for better UX */
-    #loading {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: #0a0a0a;
-      z-index: 9999;
-    }
-
-    #loading::after {
-      content: '';
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      border-top-color: #ca0f5c;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Hide loading when React mounts */
-    #root:not(:empty) ~ #loading {
-      display: none;
-    }
+    body { margin: 0; background: #0a0a0a; color: #fff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; background: #0a0a0a; z-index: 9999; }
+    #loading::after { content: ''; width: 48px; height: 48px; border: 3px solid rgba(255,255,255,.1); border-top-color: #ca0f5c; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    #root:not(:empty) ~ #loading { display: none; }
   </style>
-  <script type="module" crossorigin src="/assets/js/index-DZr0FSIF.js"></script>
+  <script type="module" crossorigin src="/assets/js/index-CJmmhEtb.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/js/rolldown-runtime-DyJqkbvi.js">
-  <link rel="modulepreload" crossorigin href="/assets/js/react-CLgRf9Z1.js">
-  <link rel="stylesheet" crossorigin href="/assets/styles/index-CWRn3fDo.css">
+  <link rel="modulepreload" crossorigin href="/assets/js/react-DePvRYFg.js">
+  <link rel="stylesheet" crossorigin href="/assets/styles/index-BaqbIR4h.css">
 </head>
 <body>
-<!-- App root -->
 <div id="root"></div>
-
-<!-- Loading indicator (hidden when React mounts) -->
 <div id="loading" aria-label="Loading"></div>
-
-<!-- Main script -->
-
-<!-- Optional: Analytics -->
-<!-- Add your analytics script here -->
-
-<!-- Optional: Service Worker registration -->
 <script>
-  // Register service worker for offline support (if you add one)
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      // navigator.serviceWorker.register('/sw.js');
+// navigator.serviceWorker.register('/sw.js')
     });
   }
 </script>
