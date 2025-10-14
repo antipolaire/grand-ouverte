@@ -30,7 +30,7 @@ export default function App() {
                 id: 1,
                 title: "Liebesspieler",
                 members:
-                    "Marcel Wache · Thomas Wolf · Erik · David",
+                    "Marcel Wache · Thomas Adler · Erik · David",
                 description:
                     "Rohe Energie trifft auf emotionale Tiefe",
                 cover:
@@ -43,7 +43,7 @@ export default function App() {
                 id: 2,
                 title: "Nächtliche Fluchten",
                 members:
-                    "Marcel Wache · Thomas Wolf · Erik · David",
+                    "Marcel Wache · Thomas Adler · Erik · David",
                 description:
                     "Übernatürlicher Abstieg in den Abgrund – unerbittliche Schwere, hypnotische Melancholie.",
                 cover:
@@ -118,7 +118,7 @@ export default function App() {
             {/* ----- Hero ----- */}
             <section id="home" className="hero" aria-label="Hero">
                 <div className="hero-media" aria-hidden>
-                    <div className="hero-img" />
+                    <div className="hero-video" />
                     <div className="hero-gradient" />
                     <div className="hero-radial" />
                 </div>
@@ -263,13 +263,28 @@ export default function App() {
                     <div className="follow">
                         <h4 className="foot-h">Follow Us</h4>
                         <div className="socials">
-                            <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden /></a>
-                            <a href="#" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
-                            <a href="#" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
+                            <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden/></a>
+                            <a href="https://www.facebook.com/people/Grand-Ouverte/61582449352378/"
+                               aria-label="Facebook"><Facebook size={22} aria-hidden/></a>
+                            <a href="https://grandouverte.bandcamp.com" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden/></a>
                         </div>
                     </div>
                 </div>
-                <div className="copyright">© {new Date().getFullYear()} Grand Ouverte. All rights reserved.</div>
+                <div className="copyright">
+                    © {new Date().getFullYear()} Grand Ouverte. All rights reserved.
+                    {typeof __BUILD_TIME__ !== 'undefined' && (
+                        <span style={{ opacity: 0.5, marginLeft: '1rem', fontSize: '0.8rem' }}>
+                            {/* eslint-disable-next-line no-undef */}
+                            v{new Date(__BUILD_TIME__).toLocaleDateString('de-DE', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+                        </span>
+                    )}
+                </div>
             </footer>
         </div>
     );
@@ -344,7 +359,7 @@ function BandGrid() {
     const members = [
         { name: "Marcel Wache", role: "Lead Vocals", image: "images/thomas_studio.png", imageWebP: "images/thomas_studio.webp" },
         { name: "David", role: "Drums", image: "images/erik.png", imageWebP: "images/erik.webp" },
-        { name: "Thomas Wolf", role: "Lead Guitar", image: "images/DSCF0112.jpg", imageWebP: "images/DSCF0112.webp" },
+        { name: "Thomas Adler", role: "Lead Guitar", image: "images/DSCF0112.jpg", imageWebP: "images/DSCF0112.webp" },
         { name: "Erik", role: "Bass", image: "images/dave_drums.jpg", imageWebP: "images/dave_drums.webp" },
     ];
 
@@ -408,14 +423,10 @@ function usePrefersReducedMotion() {
 }
 
 const GALLERY = [
-    "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=600&fit=crop&q=80&auto=format",
-    "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&h=600&fit=crop&q=80&auto=format",
+    "images/u5753668412_Close_up_stage_photography._Fisheye._Professional_92e49794-acd2-416e-8eae-bc819eb53652_1.webp",
+    "images/u5753668412_Live_event_photography_of_epic_rock_band_Grand_Ou_84398df1-4c5a-4de2-a3b2-63032ad6cf31_2.webp",
+    "images/u5753668412_Live_event_photography_of_epic_rock_band_Grand_Ou_84398df1-4c5a-4de2-a3b2-63032ad6cf31_3.webp",
+    "images/u5753668412_Close_up_stage_photography._Fisheye._Professional_92e49794-acd2-416e-8eae-bc819eb53652_3.webp",
 ];
 
 

@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     tailwind(),
     react(),
-    
+
     // Brotli compression for better compression ratios
     viteCompression({
       verbose: true,
@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
       ext: '.br',
       deleteOriginFile: false,
     }),
-    
+
     // Gzip compression as fallback for older browsers
     viteCompression({
       verbose: true,
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => ({
       ext: '.gz',
       deleteOriginFile: false,
     }),
-    
+
     // Image optimization
     viteImagemin({
       gifsicle: {
@@ -68,7 +68,7 @@ export default defineConfig(({ mode }) => ({
         ],
       },
     }),
-    
+
     // Bundle analyzer (only in analyze mode)
     mode === 'analyze' && visualizer({
       open: true,
@@ -77,22 +77,23 @@ export default defineConfig(({ mode }) => ({
       brotliSize: true,
     }),
   ].filter(Boolean),
-  
+
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
-  
+
   define: {
     'process.env': {},
     global: {},
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
   },
-  
+
   build: {
     target: 'es2020',
     outDir: 'dist',
     assetsDir: 'assets',
     cssCodeSplit: true,
-    
+
     // Better chunk splitting for optimal caching
     rollupOptions: {
       output: {
@@ -107,7 +108,7 @@ export default defineConfig(({ mode }) => ({
             return 'vendor';
           }
         },
-        
+
         assetFileNames: (assetInfo) => {
           const name = assetInfo.name || ''
           const ext = name.split('.').pop()
@@ -120,20 +121,20 @@ export default defineConfig(({ mode }) => ({
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
-    
+
     // Optimize chunk size warnings
     chunkSizeWarningLimit: 1000,
-    
+
     sourcemap: false,
     minify: 'esbuild', // esbuild is faster than terser and good enough
-    
+
     // Enable CSS minification
     cssMinify: true,
-    
+
     // Optimize assets inlining
     assetsInlineLimit: 4096, // Inline assets < 4KB
   },
-  
+
   // Optimize dependencies during dev
   optimizeDeps: {
     include: ['react', 'react-dom', 'lucide-react'],
