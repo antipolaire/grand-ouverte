@@ -215,16 +215,24 @@ a{color:inherit}
     padding-bottom:3rem;
 }
 .hero-media{position:absolute;inset:0}
-.hero-img{
+.hero-video{
     position:absolute;
     inset:0;
-    background:url('../../images/u5753668412_Attractive_girl_dressed_like_in_17th_century_in_r_ac07c330-f8af-40ab-8ac9-61d03ea409d6_0.png') center/cover no-repeat;
-    opacity:.65;
-    animation:subtleZoom 20s ease-in-out infinite alternate;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
 }
-@keyframes subtleZoom{
-    from{transform:scale(1)}
-    to{transform:scale(1.05)}
+.hero-video video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    opacity:1.0;
+}
+@media(max-width:640px){
+    .hero-video {top:-20%;height:110%}
+    .hero-video video{width:auto;height:50%}
 }
 .hero-gradient{
     position:absolute;

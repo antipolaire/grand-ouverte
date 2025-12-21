@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {  Music, Calendar, Menu, X, Play, ShoppingCart } from "lucide-react";
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaBandcamp as Bandcamp } from "react-icons/fa";
 
 /**
- * GRAND OUVERTE – Enhanced One-Pager (Premium UI/UX Edition)
+ * GRAND OUVERT – Enhanced One-Pager (Premium UI/UX Edition)
  * - Professional polish with modern effects
  * - Sophisticated animations and transitions
  * - Glassmorphism and gradient effects
@@ -59,22 +59,6 @@ export default function App() {
     const events = useMemo(
         () => [
             {
-                date: "February 10, 2026",
-                venue: "Ost-Pol, Dresden",
-                location: "Rothenburger Str. 15, 01099 Dresden",
-                url: "#tickets-bataclan",
-            },
-            {
-                date: "April 7, 2026",
-                venue: "Alter Schlachthof, Dresden",
-                location: "Kesselsdorfer Str. 29, 01159 Dresden",
-                url: "#tickets-olympia",
-            },
-            {
-                date: "June 18, 2026",
-                venue: "Olympiastadion, Berlin",
-                location: "Olympischer Platz 3, 14053 Berlin",
-                url: "#tickets-trianon",
             },
         ],
         []
@@ -88,9 +72,9 @@ export default function App() {
             {/* ----- Header / Nav ----- */}
             <header className={"site-header" + (scrolled ? " scrolled" : "")}>
                 <div className="container header-inner" role="navigation" aria-label="Primary">
-                    <a className="brand" href="#home" aria-label="Grand Ouverte – Home">
+                    <a className="brand" href="#home" aria-label="Grand Ouvert – Home">
                         <span className="brand-top">GRAND</span>
-                        <span className="brand-bottom">OUVERTE</span>
+                        <span className="brand-bottom">OUVERT</span>
                     </a>
 
                     <nav className="desktop-nav" aria-label="Primary">
@@ -99,7 +83,7 @@ export default function App() {
                         <a href="#band">BAND</a>
                         <a href="#gallery">FOTOS</a>
                         <a href="#newsletter">NEWS</a>
-                    </nav>
+                    </nav>Y
 
                     <button
                         className="menu-button"
@@ -118,17 +102,22 @@ export default function App() {
             {/* ----- Hero ----- */}
             <section id="home" className="hero" aria-label="Hero">
                 <div className="hero-media" aria-hidden>
-                    <div className="hero-video" />
-                    <div className="hero-gradient" />
+                    <div className="hero-video">
+                        <video
+                            src="video/go_bg_3.mp4"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                        />
+                    </div>
+                    <div className="hero-gradient"/>
                     <div className="hero-radial" />
                 </div>
                 <div className="container hero-inner">
-                    <h1 className="hero-title">
-                        GRAND
-                        <br />
-                        OUVERTE
-                    </h1>
-                    <p className="hero-tag">Handgemachter Indie Rock aus Dresden</p>
+
+                    <p className="hero-tag">Grand Ouvert - Rock aus Dresden</p>
                     <div className="hero-cta">
                         <a className="btn btn-primary" href="#music">
                             <Music size={18} aria-hidden /> MUSIK
@@ -198,7 +187,7 @@ export default function App() {
                         <div className="marquee" aria-hidden>
                             <div className="marquee-track">
                                 {Array.from({length: 10}).map((_, i) => (
-                                    <span key={i}>Grand Ouverte</span>
+                                    <span key={i}>Grand Ouvert</span>
                                 ))}
                             </div>
                         </div>
@@ -264,14 +253,14 @@ export default function App() {
                         <h4 className="foot-h">Follow Us</h4>
                         <div className="socials">
                             <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden/></a>
-                            <a href="https://www.facebook.com/people/Grand-Ouverte/61582449352378/"
+                            <a href="https://www.facebook.com/people/Grand-Ouvert/61582449352378/"
                                aria-label="Facebook"><Facebook size={22} aria-hidden/></a>
-                            <a href="https://grandouverte.bandcamp.com" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden/></a>
+                            <a href="https://grandouvert.bandcamp.com" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden/></a>
                         </div>
                     </div>
                 </div>
                 <div className="copyright">
-                    © {new Date().getFullYear()} Grand Ouverte. All rights reserved.
+                    © {new Date().getFullYear()} Grand Ouvert. All rights reserved.
                     {typeof __BUILD_TIME__ !== 'undefined' && (
                         <span style={{ opacity: 0.5, marginLeft: '1rem', fontSize: '0.8rem' }}>
                             {/* eslint-disable-next-line no-undef */}
@@ -333,7 +322,7 @@ function AlbumCard({ album }) {
                     aria-hidden
                 >
                     <div className="vinyl-label" style={{ background: album.vinylColor }}>
-                        <div className="vinyl-brand">Grand Ouverte</div>
+                        <div className="vinyl-brand">Grand Ouvert</div>
                         <div className="vinyl-title">{album.title}</div>
                     </div>
                 </div>
@@ -448,8 +437,8 @@ function MobileMenu({ open, onClose }) {
             </nav>
             <div className="mobile-social">
                 <a href="#" aria-label="Instagram"><Instagram size={22} aria-hidden /></a>
-                <a href="https://www.facebook.com/people/Grand-Ouverte/61582449352378/" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
-                <a href="https://grandouverte.bandcamp.com" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
+                <a href="https://www.facebook.com/people/Grand-Ouvert/61582449352378/" aria-label="Facebook"><Facebook size={22} aria-hidden /></a>
+                <a href="https://grandouvert.bandcamp.com" aria-label="Bandcamp"><Bandcamp size={22} aria-hidden /></a>
             </div>
         </div>
     );
